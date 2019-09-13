@@ -26,7 +26,7 @@ LQSelect &LQSelect::distinct()
 
 LQSelect &LQSelect::select(const QString &sql)
 {
-    m_what << sql.simplified();
+    m_what << sql.trimmed();
     return *this;
 }
 
@@ -44,7 +44,7 @@ LQSelect &LQSelect::from(const QString &entity, const QString &alias)
 {
     m_from = QString("%1%2")
             .arg(entity)
-            .arg(alias.isEmpty() ? "" : QString(" AS '%1'").arg(alias.simplified()));
+            .arg(alias.isEmpty() ? "" : QString(" AS '%1'").arg(alias.trimmed()));
 
     return *this;
 }

@@ -11,7 +11,7 @@ LQDelete::LQDelete(const QString &entity) :
 
 LQDelete LQDelete::delete_from(const QString &entity)
 {
-    return LQDelete(entity.simplified());
+    return LQDelete(entity.trimmed());
 }
 
 
@@ -42,7 +42,7 @@ LQDelete &LQDelete::order_by(const LQOrderBy &orderBy)
 
 LQDelete &LQDelete::order_by(const QString &sql)
 {
-    m_order_by << sql.simplified();
+    m_order_by << sql.trimmed();
     return *this;
 }
 

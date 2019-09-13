@@ -11,7 +11,7 @@ LQColumn::LQColumn(const QString &name) :
 
 LQColumn LQColumn::name(const QString &name)
 {
-    return LQColumn(name.simplified());
+    return LQColumn(name.trimmed());
 }
 
 
@@ -26,7 +26,7 @@ LQColumn &LQColumn::type(LQColumn::Type type)
 
 LQColumn &LQColumn::type(const QString &type)
 {
-    m_type = type.simplified();
+    m_type = type.trimmed();
     return *this;
 }
 
@@ -135,6 +135,8 @@ LQColumn &LQColumn::def(const QString &value)
     if (!value.isEmpty()) {
         QStringList constraint;
         constraint << "DEFAULT";
+//        QString _value = value;
+//        constraint << _value.replace("'", "''");
         constraint << value;
         m_constraints << constraint.join(' ');
     }
@@ -150,7 +152,7 @@ LQColumn &LQColumn::collate(const QString &collation)
     constraint << "COLLATE";
 
     if (!collation.isEmpty())
-        constraint << collation.simplified();
+        constraint << collation.trimmed();
 
     m_constraints << constraint.join(' ');
 
@@ -161,7 +163,7 @@ LQColumn &LQColumn::collate(const QString &collation)
 
 LQColumn &LQColumn::foreign_key(const QString &key)
 {
-    m_constraints << key.simplified();
+    m_constraints << key.trimmed();
     return *this;
 }
 

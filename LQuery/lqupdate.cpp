@@ -19,14 +19,14 @@ LQUpdate &LQUpdate::operator=(const LQUpdate &)
 
 LQUpdate LQUpdate::update(const QString &entity, LQUpdate::Type type)
 {
-    return LQUpdate(entity.simplified(), type);
+    return LQUpdate(entity.trimmed(), type);
 }
 
 
 
 LQUpdate &LQUpdate::set(const QString &column, const QVariant &value)
 {
-    m_values.insert(column.simplified(), value);
+    m_values.insert(column.trimmed(), value);
     return *this;
 }
 
@@ -107,10 +107,12 @@ QString LQUpdate::make()
 
     if (!m_values.isEmpty()) {
         QStringList values;
-        for (const QString &key : m_values.keys())
+        for (const QString &key : m_values.keys()) {
+            const QString value = m_values.value(key).toString().replace("'", "''");
             values << QString("%1 = '%2'")
                       .arg(key)
-                      .arg(m_values.value(key).toString());
+                      .arg(value);
+        }
         sql << "SET" << values.join(", ");
     }
 

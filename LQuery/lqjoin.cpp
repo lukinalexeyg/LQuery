@@ -1,6 +1,7 @@
 #include "lqjoin.h"
 
 
+
 LQJoin::LQJoin(Type type, const QString &entity) :
     m_type(type),
     m_entity(entity)
@@ -11,21 +12,21 @@ LQJoin::LQJoin(Type type, const QString &entity) :
 
 LQJoin LQJoin::inner(const QString &entity)
 {
-    return LQJoin(Inner, entity.simplified());
+    return LQJoin(Inner, entity.trimmed());
 }
 
 
 
 LQJoin LQJoin::left(const QString &entity)
 {
-    return LQJoin(Left, entity.simplified());
+    return LQJoin(Left, entity.trimmed());
 }
 
 
 
 LQJoin LQJoin::cross(const QString &entity)
 {
-    return LQJoin(Cross, entity.simplified());
+    return LQJoin(Cross, entity.trimmed());
 }
 
 
@@ -48,7 +49,7 @@ LQJoin &LQJoin::on(const QString &expression)
 
 LQJoin &LQJoin::using_(const QString &column)
 {
-    m_columns << column.simplified();
+    m_columns << column.trimmed();
     return *this;
 }
 

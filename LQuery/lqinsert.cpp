@@ -19,7 +19,7 @@ LQInsert &LQInsert::operator=(const LQInsert &)
 
 LQInsert LQInsert::insert_into(const QString &entity, Type type)
 {
-    return LQInsert(entity.simplified(), type);
+    return LQInsert(entity.trimmed(), type);
 }
 
 
@@ -45,8 +45,8 @@ LQInsert &LQInsert::values(const QMap<QString, QVariant> &values)
 
 LQInsert &LQInsert::column(const QString &column)
 {
-    if (!m_columns.contains(column.simplified()))
-        m_columns << column.simplified();
+    if (!m_columns.contains(column.trimmed()))
+        m_columns << column.trimmed();
     return *this;
 }
 
@@ -146,7 +146,8 @@ QString LQInsert::make()
             while (it.hasNext()) {
                 it.next();
                 const int index = m_columns.indexOf(it.key());
-                rowVector[index] = QString("'%1'").arg(it.value().toString());
+                const QString value = it.value().toString().replace("'", "''");
+                rowVector[index] = QString("'%1'").arg(value);
             }
 
             const QStringList rowList = rowVector.toList();

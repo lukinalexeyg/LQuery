@@ -11,7 +11,7 @@ LQView::LQView(const QString &entity) :
 
 LQView LQView::create(const QString &entity)
 {
-    return LQView(entity.simplified());
+    return LQView(entity.trimmed());
 }
 
 

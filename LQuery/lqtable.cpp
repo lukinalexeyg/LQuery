@@ -11,7 +11,7 @@ LQTable::LQTable(const QString &entity) :
 
 LQTable LQTable::create(const QString &entity)
 {
-    return LQTable(entity.simplified());
+    return LQTable(entity.trimmed());
 }
 
 
@@ -50,7 +50,7 @@ LQTable &LQTable::column(const QString &sql)
 
 LQTable &LQTable::primary_key(const QString &sql)
 {
-    m_primary_key = sql.simplified();
+    m_primary_key = sql.trimmed();
     return *this;
 }
 
@@ -58,7 +58,7 @@ LQTable &LQTable::primary_key(const QString &sql)
 
 LQTable &LQTable::unique(const QString &sql)
 {
-    m_unique = sql.simplified();
+    m_unique = sql.trimmed();
     return *this;
 }
 
@@ -82,7 +82,7 @@ LQTable &LQTable::check(const QString &sql)
 
 LQTable &LQTable::foreign_key(const QString &key)
 {
-    m_foreign_key = key.simplified();
+    m_foreign_key = key.trimmed();
     return *this;
 }
 

@@ -25,7 +25,7 @@ LQOrderBy LQOrderBy::expression(const QString &sql)
 
 LQOrderBy &LQOrderBy::collate(const QString &collation)
 {
-    m_collation = collation.simplified();
+    m_collation = collation.trimmed();
     return *this;
 }
 
